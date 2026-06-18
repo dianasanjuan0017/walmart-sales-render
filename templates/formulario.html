@@ -1,59 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-    <title>Predicción Ventas Walmart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción Walmart</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#0071ce;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:20px;
+        }
+
+        .container{
+            background:white;
+            width:100%;
+            max-width:600px;
+            padding:35px;
+            border-radius:20px;
+            box-shadow:0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        h1{
+            text-align:center;
+            color:#0071ce;
+            margin-bottom:25px;
+        }
+
+        label{
+            display:block;
+            margin-top:12px;
+            margin-bottom:5px;
+            font-weight:bold;
+            color:#333;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            border:2px solid #ddd;
+            border-radius:10px;
+            font-size:15px;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#ffc220;
+        }
+
+        button{
+            width:100%;
+            margin-top:25px;
+            padding:14px;
+            border:none;
+            border-radius:10px;
+            background:#ffc220;
+            color:#333;
+            font-size:17px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            transform:scale(1.02);
+        }
+
+        .resultado{
+            margin-top:25px;
+            background:#eaf4ff;
+            padding:18px;
+            border-radius:12px;
+            text-align:center;
+            border-left:6px solid #0071ce;
+        }
+
+        .resultado h2{
+            color:#0071ce;
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-<h1>Predicción de Ventas Walmart</h1>
+<div class="container">
 
-<form action="/predict" method="POST">
+    <h1>🛒 Predicción de Ventas Walmart</h1>
 
-<label>Store:</label>
-<input type="number" name="Store"><br><br>
+    <form action="/predict" method="POST">
 
-<label>Temperature:</label>
-<input type="number" step="any" name="Temperature"><br><br>
+        <label>Store</label>
+        <input type="number" name="Store" required>
 
-<label>Fuel Price:</label>
-<input type="number" step="any" name="Fuel_Price"><br><br>
+        <label>Fecha</label>
+        <input type="date" name="Date" required>
 
-<label>CPI:</label>
-<input type="number" step="any" name="CPI"><br><br>
+        <label>Temperature</label>
+        <input type="number" step="any" name="Temperature" required>
 
-<label>Unemployment:</label>
-<input type="number" step="any" name="Unemployment"><br><br>
+        <label>Fuel Price</label>
+        <input type="number" step="any" name="Fuel_Price" required>
 
-<label>Year:</label>
-<input type="number" name="Year"><br><br>
+        <label>CPI</label>
+        <input type="number" step="any" name="CPI" required>
 
-<label>Month:</label>
-<input type="number" name="Month"><br><br>
+        <label>Unemployment</label>
+        <input type="number" step="any" name="Unemployment" required>
 
-<label>Day:</label>
-<input type="number" name="Day"><br><br>
+        <button type="submit">
+            Predecir Ventas
+        </button>
 
-<label>Week of Year:</label>
-<input type="number" name="Week_of_Year"><br><br>
+    </form>
 
+    {% if prediction %}
 
-<button type="submit">
-Predecir ventas
-</button>
+    <div class="resultado">
+        <h2>
+            Venta semanal estimada:
+            ${{ "{:,.2f}".format(prediction) }}
+        </h2>
+    </div>
 
-</form>
+    {% endif %}
 
-
-{% if prediction %}
-
-<h2>
-Venta semanal estimada:
-{{prediction}}
-</h2>
-
-{% endif %}
-
+</div>
 
 </body>
 </html>
