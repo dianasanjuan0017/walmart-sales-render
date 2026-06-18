@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predicción Ventas Walmart</title>
+</head>
+
+<body>
+
+<h1>Predicción de Ventas Walmart</h1>
+
+<form action="/predict" method="POST">
+
+<label>Store:</label>
+<input type="number" name="Store"><br><br>
+
+<label>Temperature:</label>
+<input type="number" step="any" name="Temperature"><br><br>
+
+<label>Fuel Price:</label>
+<input type="number" step="any" name="Fuel_Price"><br><br>
+
+<label>CPI:</label>
+<input type="number" step="any" name="CPI"><br><br>
+
+<label>Unemployment:</label>
+<input type="number" step="any" name="Unemployment"><br><br>
+
+<label>Year:</label>
+<input type="number" name="Year"><br><br>
+
+<label>Month:</label>
+<input type="number" name="Month"><br><br>
+
+<label>Day:</label>
+<input type="number" name="Day"><br><br>
+
+<label>Week of Year:</label>
+<input type="number" name="Week_of_Year"><br><br>
+
+
+<button type="submit">
+Predecir ventas
+</button>
+
+</form>
+
+
+{% if prediction %}
+
+<h2>
+Venta semanal estimada:
+{{prediction}}
+</h2>
+
+{% endif %}
+
+
+</body>
+</html>
