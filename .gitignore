@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+Walmart_Sales.csv
