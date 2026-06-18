@@ -9,7 +9,11 @@ modelo = joblib.load("walmart_model.pkl")
 
 @app.route("/")
 def home():
-    return render_template("formulario.html")
+    return render_template(
+        "formulario.html",
+        prediction=None,
+        datos=None
+    )
 
 
 @app.route("/predict", methods=["POST"])
@@ -17,13 +21,7 @@ def predict():
 
     datos = request.form
 
-    # Convertir fecha
     fecha = pd.to_datetime(datos["Date"])
-
-    year = fecha.year
-    month = fecha.month
-    day = fecha.day
-    week_of_year = fecha.isocalendar().week
 
     entrada = pd.DataFrame([{
         "Store": int(datos["Store"]),
@@ -31,17 +29,18 @@ def predict():
         "Fuel_Price": float(datos["Fuel_Price"]),
         "CPI": float(datos["CPI"]),
         "Unemployment": float(datos["Unemployment"]),
-        "Year": year,
-        "Month": month,
-        "Day": day,
-        "Week_of_Year": week_of_year
+        "Year": fecha.year,
+        "Month": fecha.month,
+        "Day": fecha.day,
+        "Week_of_Year": fecha.isocalendar().week
     }])
 
     prediccion = modelo.predict(entrada)
 
     return render_template(
         "formulario.html",
-        prediction=round(float(prediccion[0]), 2)
+        prediction=round(float(prediccion[0]), 2),
+        datos=datos
     )
 
 
