@@ -1,171 +1,399 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Predicción de Ventas Walmart</title>
-
+    <!-- Fuente moderna desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body{
-            font-family: "Segoe UI", sans-serif;
-            background:#f4f6f9;
-            padding:40px 20px;
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(145deg, #eef2f7 0%, #f8faff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
         }
 
-        .container{
-            max-width:700px;
-            margin:auto;
-            background:white;
-            padding:35px;
-            border-radius:15px;
-            box-shadow:0 4px 15px rgba(0,0,0,0.1);
+        .container {
+            max-width: 720px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 2.8rem 2.8rem 3rem;
+            box-shadow: 0 20px 50px rgba(0, 40, 80, 0.12), 0 8px 20px rgba(0, 20, 40, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
         }
 
-        h1{
-            text-align:center;
-            color:#004c91;
-            margin-bottom:30px;
+        /* Encabezado con icono */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 2.2rem;
         }
 
-        label{
-            display:block;
-            margin-bottom:6px;
-            font-weight:600;
-            color:#333;
+        .header i {
+            font-size: 2.2rem;
+            color: #0077be;
+            background: #e1edf9;
+            padding: 12px;
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 80, 150, 0.08);
         }
 
-        input{
-            width:100%;
-            padding:12px;
-            margin-bottom:18px;
-            border:1px solid #d9d9d9;
-            border-radius:8px;
-            font-size:15px;
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #1a2e4b;
+            letter-spacing: -0.3px;
+            margin: 0;
         }
 
-        input:focus{
-            outline:none;
-            border-color:#004c91;
+        h1 span {
+            color: #0077be;
         }
 
-        button{
-            width:100%;
-            padding:14px;
-            border:none;
-            border-radius:8px;
-            background:#004c91;
-            color:white;
-            font-size:16px;
-            font-weight:bold;
-            cursor:pointer;
+        /* Etiquetas */
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1f3a5f;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            opacity: 0.8;
         }
 
-        button:hover{
-            opacity:0.9;
+        /* Campos de entrada */
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            background: #ffffff;
+            border: 1.5px solid #e2eaf2;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #1a2e4b;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0, 20, 40, 0.02);
         }
 
-        .resultado{
-            margin-top:25px;
-            background:#eef6ff;
-            border-left:5px solid #004c91;
-            padding:20px;
-            border-radius:8px;
-            text-align:center;
+        input:focus {
+            outline: none;
+            border-color: #0077be;
+            box-shadow: 0 6px 16px rgba(0, 119, 190, 0.12);
+            background: #ffffff;
+            transform: scale(1.01);
         }
 
-        .resultado h2{
-            color:#004c91;
+        input::placeholder {
+            color: #a0b8cf;
+            font-weight: 400;
+            opacity: 0.6;
         }
 
+        /* botón principal */
+        button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #0066a0, #004b7a);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 18px -6px rgba(0, 80, 150, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        button i {
+            font-size: 1.2rem;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 28px -8px rgba(0, 70, 140, 0.4);
+            background: linear-gradient(135deg, #0077be, #00558a);
+        }
+
+        button:active {
+            transform: scale(0.97);
+            box-shadow: 0 6px 12px rgba(0, 70, 140, 0.2);
+        }
+
+        /* Resultado con estilo moderno */
+        .resultado {
+            margin-top: 32px;
+            background: linear-gradient(120deg, #e8f3ff, #dceaff);
+            border-radius: 30px;
+            padding: 24px 20px;
+            text-align: center;
+            border: 1px solid rgba(0, 119, 190, 0.15);
+            box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.6), 0 8px 20px rgba(0, 70, 140, 0.06);
+            transition: all 0.4s ease;
+        }
+
+        .resultado h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00335c;
+            letter-spacing: -0.4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 12px;
+        }
+
+        .resultado h2 i {
+            color: #0077be;
+            font-size: 2rem;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 60px;
+            box-shadow: 0 2px 10px rgba(0, 70, 140, 0.08);
+        }
+
+        .resultado .monto {
+            background: white;
+            padding: 4px 18px;
+            border-radius: 60px;
+            box-shadow: 0 2px 10px rgba(0, 40, 80, 0.06);
+        }
+
+        /* Mensaje cuando no hay predicción */
+        .empty-message {
+            margin-top: 28px;
+            text-align: center;
+            color: #5a7b9c;
+            font-weight: 500;
+            background: #f4f9ff;
+            padding: 14px 10px;
+            border-radius: 40px;
+            border: 1px dashed #b6d2e8;
+            opacity: 0.7;
+        }
+
+        /* Ajustes mobile */
+        @media (max-width: 500px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header i {
+                font-size: 1.6rem;
+                padding: 8px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .resultado h2 {
+                font-size: 1.4rem;
+            }
+            button {
+                font-size: 1rem;
+                padding: 14px;
+            }
+        }
+
+        /* Efecto sutil en campos number */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* grupo de icono + label */
+        .label-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .label-icon i {
+            color: #0077be;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* separación extra */
+        .form-group {
+            margin-bottom: 4px;
+        }
+
+        small {
+            display: block;
+            text-align: right;
+            font-size: 0.7rem;
+            color: #8aa3bc;
+            margin-top: -12px;
+            margin-bottom: 12px;
+            padding-right: 4px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
     </style>
-
 </head>
-
 <body>
 
 <div class="container">
 
-    <h1>Predicción de Ventas Walmart</h1>
-
-    <form action="/predict" method="POST">
-
-        <label>Store</label>
-        <input
-            type="number"
-            name="Store"
-            min="1"
-            max="45"
-            required
-            value="{{ datos.Store if datos else '' }}"
-        >
-
-        <label>Fecha</label>
-        <input
-            type="date"
-            name="Date"
-            required
-            value="{{ datos.Date if datos else '' }}"
-        >
-
-        <label>Temperature</label>
-        <input
-            type="number"
-            step="any"
-            name="Temperature"
-            required
-            value="{{ datos.Temperature if datos else '' }}"
-        >
-
-        <label>Fuel Price</label>
-        <input
-            type="number"
-            step="any"
-            name="Fuel_Price"
-            required
-            value="{{ datos.Fuel_Price if datos else '' }}"
-        >
-
-        <label>CPI</label>
-        <input
-            type="number"
-            step="any"
-            name="CPI"
-            required
-            value="{{ datos.CPI if datos else '' }}"
-        >
-
-        <label>Unemployment</label>
-        <input
-            type="number"
-            step="any"
-            name="Unemployment"
-            required
-            value="{{ datos.Unemployment if datos else '' }}"
-        >
-
-        <button type="submit">
-            Predecir ventas
-        </button>
-
-    </form>
-
-    {% if prediction %}
-
-    <div class="resultado">
-        <h2>
-            Venta semanal estimada:
-            ${{ "{:,.2f}".format(prediction) }}
-        </h2>
+    <!-- Encabezado con ícono -->
+    <div class="header">
+        <i class="fas fa-store-alt"></i>
+        <h1>Walmart <span>Sales</span></h1>
     </div>
 
+    <!-- Formulario -->
+    <form action="/predict" method="POST">
+
+        <!-- Store -->
+        <div class="form-group">
+            <div class="label-icon">
+                <i class="fas fa-hashtag"></i>
+                <label for="Store">Store</label>
+            </div>
+            <input
+                type="number"
+                id="Store"
+                name="Store"
+                min="1"
+                max="45"
+                required
+                placeholder="Ej. 1"
+                value="{{ datos.Store if datos else '' }}"
+            />
+        </div>
+
+        <!-- Fecha -->
+        <div class="form-group">
+            <div class="label-icon">
+                <i class="fas fa-calendar-alt"></i>
+                <label for="Date">Fecha</label>
+            </div>
+            <input
+                type="date"
+                id="Date"
+                name="Date"
+                required
+                value="{{ datos.Date if datos else '' }}"
+            />
+        </div>
+
+        <!-- Temperature -->
+        <div class="form-group">
+            <div class="label-icon">
+                <i class="fas fa-thermometer-half"></i>
+                <label for="Temperature">Temperature</label>
+            </div>
+            <input
+                type="number"
+                step="any"
+                id="Temperature"
+                name="Temperature"
+                required
+                placeholder="Ej. 72.5"
+                value="{{ datos.Temperature if datos else '' }}"
+            />
+        </div>
+
+        <!-- Fuel Price -->
+        <div class="form-group">
+            <div class="label-icon">
+                <i class="fas fa-gas-pump"></i>
+                <label for="Fuel_Price">Fuel Price</label>
+            </div>
+            <input
+                type="number"
+                step="any"
+                id="Fuel_Price"
+                name="Fuel_Price"
+                required
+                placeholder="Ej. 3.45"
+                value="{{ datos.Fuel_Price if datos else '' }}"
+            />
+        </div>
+
+        <!-- CPI -->
+        <div class="form-group">
+            <div class="label-icon">
+                <i class="fas fa-chart-line"></i>
+                <label for="CPI">CPI</label>
+            </div>
+            <input
+                type="number"
+                step="any"
+                id="CPI"
+                name="CPI"
+                required
+                placeholder="Ej. 215.3"
+                value="{{ datos.CPI if datos else '' }}"
+            />
+        </div>
+
+        <!-- Unemployment -->
+        <div class="form-group">
+            <div class="label-icon">
+                <i class="fas fa-user-friends"></i>
+                <label for="Unemployment">Unemployment</label>
+            </div>
+            <input
+                type="number"
+                step="any"
+                id="Unemployment"
+                name="Unemployment"
+                required
+                placeholder="Ej. 6.8"
+                value="{{ datos.Unemployment if datos else '' }}"
+            />
+        </div>
+
+        <button type="submit">
+            <i class="fas fa-chart-simple"></i> Predecir ventas
+        </button>
+    </form>
+
+    <!-- Resultado de predicción -->
+    {% if prediction %}
+    <div class="resultado">
+        <h2>
+            <i class="fas fa-cash-register"></i>
+            <span>Venta semanal estimada</span>
+            <span class="monto">${{ "{:,.2f}".format(prediction) }}</span>
+        </h2>
+    </div>
+    {% else %}
+    <div class="empty-message">
+        <i class="fas fa-circle-info" style="margin-right: 8px;"></i> Ingresa los datos y presiona "Predecir ventas"
+    </div>
     {% endif %}
 
 </div>
